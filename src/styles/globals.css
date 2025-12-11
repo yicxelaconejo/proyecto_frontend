@@ -1,0 +1,26 @@
+/* src/styles/globals.css */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #0A1521; /* fondo oscuro estilo maqueta */
+  color: #fff;
+  font-family: Inter, Roboto, Arial, sans-serif;
+}
+
+/* Cada sección tendrá un margin-top para evitar quedar oculto por el Navbar fijo.
+   Ajusta 80px si tu AppBar mide ~64-80px. */
+.section {
+  scroll-margin-top: 88px; /* espacio de seguridad para AppBar fijo */
+}
+
+/* Opcional: contenedor centrado */
+.container-centered {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Ajustes visuales para que los elementos se vean como maqueta */
+.section-title { font-weight: 700; margin-bottom: 16px; color:#fff; }
