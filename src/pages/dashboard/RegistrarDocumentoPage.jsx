@@ -24,7 +24,15 @@ export default function RegistrarDocumentoPage() {
 
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [archivo, setArchivo] = useState(null);
-  const [fecha, setFecha] = useState("");
+
+  // Fecha automática
+  const [fecha] = useState(() => {
+    const hoy = new Date();
+    const yyyy = hoy.getFullYear();
+    const mm = String(hoy.getMonth() + 1).padStart(2, "0");
+    const dd = String(hoy.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  });
 
   const [archivosSubidos, setArchivosSubidos] = useState([]);
 
@@ -56,7 +64,6 @@ export default function RegistrarDocumentoPage() {
 
     setTipoDocumento("");
     setArchivo(null);
-    setFecha("");
 
     setOpenSuccess(true); // abrir modal de éxito
   };
@@ -167,7 +174,7 @@ export default function RegistrarDocumentoPage() {
             label="Fecha de Subida"
             InputLabelProps={{ shrink: true }}
             value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
+            InputProps={{ readOnly: true }}
             sx={{
               minWidth: 220,
               flex: 1,

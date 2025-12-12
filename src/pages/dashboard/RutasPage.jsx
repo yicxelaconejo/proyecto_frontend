@@ -8,9 +8,23 @@ export default function RutasPage() {
     setMostrarMapa(true);
   };
 
+  // Props para los select, fondo negro y letra blanca
+  const menuProps = {
+    PaperProps: {
+      sx: {
+        bgcolor: "#0c1622", // Fondo negro del dropdown
+        "& .MuiMenuItem-root": {
+          color: "#fff", // Letra blanca
+          "&:hover": {
+            bgcolor: "#1a2533", // Hover oscuro para resaltar
+          },
+        },
+      },
+    },
+  };
+
   return (
     <Box sx={{ color: "#fff", maxWidth: 900, mx: "auto" }}>
-
       {/* Tarjeta Principal */}
       <Paper
         sx={{
@@ -18,10 +32,11 @@ export default function RutasPage() {
           bgcolor: "#0c1622",
           borderRadius: 4,
           border: "1px solid #233041",
+          color: "#fff",
         }}
       >
         {/* Título */}
-        <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
+        <Typography variant="h5" fontWeight="bold" sx={{ mb: 2, color: "#fff" }}>
           Planificación de Rutas
         </Typography>
 
@@ -35,11 +50,12 @@ export default function RutasPage() {
             borderRadius: 2,
             input: { color: "#fff" },
             "& .MuiOutlinedInput-root fieldset": { borderColor: "#233041" },
+            "& .MuiInputLabel-root": { color: "#fff" },
           }}
         />
 
         {/* Filtros */}
-        <Typography fontWeight="bold" sx={{ mb: 1 }}>
+        <Typography fontWeight="bold" sx={{ mb: 1, color: "#fff" }}>
           Filtros
         </Typography>
 
@@ -54,11 +70,12 @@ export default function RutasPage() {
           <TextField
             select
             label="Zona o Barrio"
+            SelectProps={menuProps}
             sx={{
               bgcolor: "#0f1a25",
               borderRadius: 2,
               "& .MuiOutlinedInput-root fieldset": { borderColor: "#233041" },
-              "& label": { color: "#aaa" },
+              "& label": { color: "#fff" },
               "& .MuiSelect-icon": { color: "#fff" },
               input: { color: "#fff" },
             }}
@@ -71,11 +88,12 @@ export default function RutasPage() {
           <TextField
             select
             label="Estado"
+            SelectProps={menuProps}
             sx={{
               bgcolor: "#0f1a25",
               borderRadius: 2,
               "& .MuiOutlinedInput-root fieldset": { borderColor: "#233041" },
-              "& label": { color: "#aaa" },
+              "& label": { color: "#fff" },
               "& .MuiSelect-icon": { color: "#fff" },
               input: { color: "#fff" },
             }}
@@ -89,11 +107,16 @@ export default function RutasPage() {
             type="date"
             label="Fecha"
             InputLabelProps={{ shrink: true }}
+            InputProps={{
+              sx: {
+                svg: { color: "#fff" }, // Icono de calendario blanco
+              },
+            }}
             sx={{
               bgcolor: "#0f1a25",
               borderRadius: 2,
               "& .MuiOutlinedInput-root fieldset": { borderColor: "#233041" },
-              "& label": { color: "#aaa" },
+              "& label": { color: "#fff" },
               input: { color: "#fff" },
               gridColumn: { md: "1 / 3" },
             }}
@@ -111,6 +134,8 @@ export default function RutasPage() {
             py: 1.2,
             textTransform: "none",
             fontWeight: "bold",
+            color: "#fff",
+            "&:hover": { bgcolor: "#1565c0" },
           }}
         >
           Optimizar Ruta
@@ -124,11 +149,11 @@ export default function RutasPage() {
             mt: 3,
             p: 1,
             borderRadius: 3,
-            bgcolor: "#fff",
+            bgcolor: "#0c1622",
           }}
         >
           <img
-            src="/mapa.png" // Desde /public
+            src="/mapa.png"
             alt="mapa de ruta"
             style={{
               width: "100%",

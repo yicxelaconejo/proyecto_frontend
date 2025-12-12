@@ -49,7 +49,11 @@ export default function ClientesPage() {
       (estadoFiltro === "" || c.estado === estadoFiltro)
   );
 
-  // ⭐ REDIRECCIÓN CORRECTA A GESTIÓN DE BENEFICIARIOS
+  // ⭐ Redirige a WhatsAppEnviarMensajePage.jsx
+  const handleWhatsappPage = (documentoCliente) => {
+    navigate(`/dashboard/clientes/${documentoCliente}/whatsapp/enviar`);
+  };
+
   const handleRegistrarBeneficiario = (documentoCliente) => {
     navigate(`/dashboard/clientes/${documentoCliente}/beneficiarios`);
   };
@@ -102,7 +106,6 @@ export default function ClientesPage() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Botón añadir cliente */}
           <Button
             variant="contained"
             startIcon={<AddIcon />}
@@ -137,7 +140,7 @@ export default function ClientesPage() {
                 <TableCell sx={{ color: "#fff" }}>{c.telefono}</TableCell>
                 <TableCell sx={{ color: "#fff" }}>{c.estado}</TableCell>
 
-                <TableCell align="center" sx={{ color: "#fff" }}>
+                <TableCell align="center">
                   <IconButton
                     color="primary"
                     onClick={() =>
@@ -160,11 +163,18 @@ export default function ClientesPage() {
                     <PictureAsPdfIcon />
                   </IconButton>
 
-                  <IconButton sx={{ color: "#25D366" }}>
+                  <IconButton
+                    sx={{ color: "#25D366" }}
+                    onClick={() =>
+                      navigate(
+                        `/dashboard/clientes/${c.documento}/whatsapp/enviar`
+                      )
+                    }
+                  >
                     <WhatsAppIcon />
                   </IconButton>
 
-                  {/* ⭐ Botón que redirige a Gestión de Beneficiarios */}
+                  {/* ⭐ Beneficiarios */}
                   <IconButton
                     sx={{ color: "#4caf50" }}
                     onClick={() => handleRegistrarBeneficiario(c.documento)}

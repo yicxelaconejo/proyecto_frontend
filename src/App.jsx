@@ -9,13 +9,20 @@ import RutasPage from "./pages/dashboard/RutasPage";
 import ClientesPage from "./pages/dashboard/ClientesPage";
 import RegistrarClientePage from "./pages/dashboard/RegistrarClientePage";
 
-// ⭐ NUEVAS IMPORTACIONES
+// Páginas relacionadas con Clientes
 import VerDetallesTitularPage from "./pages/dashboard/VerDetallesTitularPage";
 import RegistrarDocumentoPage from "./pages/dashboard/RegistrarDocumentoPage";
+
+// Gestión y Registro de Beneficiarios
+import GestionBeneficiariosPage from "./pages/dashboard/GestionBeneficiariosPage";
 import RegistrarBeneficiarioPage from "./pages/dashboard/RegistrarBeneficiarioPage";
 
-// ⭐ ⭐ IMPORTACIÓN QUE SE AGREGA
-import GestionBeneficiariosPage from "./pages/dashboard/GestionBeneficiariosPage";
+// Páginas de WhatsApp
+import WhatsAppEnviarMensajePage from "./pages/dashboard/WhatsAppEnviarMensajePage";
+import WhatsAppGestionPage from "./pages/dashboard/WhatsAppGestionPage";
+
+// Pagos
+import RegistrarPagoPage from "./pages/dashboard/RegistrarPagoPage";
 
 function HomeLayout({ children }) {
   return (
@@ -31,7 +38,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* ⭐ HOME PAGE */}
+        {/* HOME */}
         <Route
           path="/"
           element={
@@ -41,13 +48,13 @@ export default function App() {
           }
         />
 
-        {/* Login */}
+        {/* LOGIN */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* ⭐ DASHBOARD */}
+        {/* DASHBOARD */}
         <Route path="/dashboard" element={<DashboardLayout />}>
 
-          {/* Inicio del Dashboard */}
+          {/* Inicio */}
           <Route index element={<DashboardHome />} />
 
           {/* Rutas */}
@@ -55,36 +62,46 @@ export default function App() {
 
           {/* Clientes */}
           <Route path="clientes" element={<ClientesPage />} />
-
-          {/* Registrar Cliente */}
           <Route path="clientes/registrar" element={<RegistrarClientePage />} />
 
-          {/* Ver Detalles del Cliente */}
+          {/* Ver Detalles */}
           <Route
             path="clientes/:documento/detalles"
             element={<VerDetallesTitularPage />}
           />
 
-          {/* Registrar Documentos */}
+          {/* Documentos */}
           <Route
             path="clientes/:documento/documentos"
             element={<RegistrarDocumentoPage />}
           />
 
-          {/* ⭐ NUEVA RUTA: Gestión de Beneficiarios */}
+          {/* Beneficiarios */}
           <Route
             path="clientes/:documento/beneficiarios"
             element={<GestionBeneficiariosPage />}
           />
-
-          {/* ⭐ NUEVA RUTA: Registrar Beneficiario */}
           <Route
             path="clientes/:documento/beneficiarios/registrar"
             element={<RegistrarBeneficiarioPage />}
           />
 
-        </Route>
+          {/* WhatsApp - envío directo */}
+          <Route
+            path="clientes/:documento/whatsapp/enviar"
+            element={<WhatsAppEnviarMensajePage />}
+          />
 
+          {/* WhatsApp - gestión */}
+          <Route path="clientes/whatsapp" element={<WhatsAppGestionPage />} />
+
+          {/* Registrar Pago */}
+          <Route
+            path="clientes/:documento/pagos/registrar"
+            element={<RegistrarPagoPage />}
+          />
+
+        </Route>
       </Routes>
     </BrowserRouter>
   );

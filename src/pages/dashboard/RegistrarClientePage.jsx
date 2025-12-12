@@ -18,10 +18,6 @@ export default function RegistrarClientePage() {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  // -------------------------
-  // ESTADOS DE FORMULARIO
-  // -------------------------
-
   const [form, setForm] = useState({
     tipoDocumento: "",
     numeroDocumento: "",
@@ -35,7 +31,6 @@ export default function RegistrarClientePage() {
     nivelEducativo: "",
     lugarNacimiento: "",
     tipoSangre: "",
-
     direccion: "",
     barrio: "",
     municipio: "",
@@ -44,18 +39,13 @@ export default function RegistrarClientePage() {
     telCelular: "",
     correo: "",
     medioContacto: "",
-
     fechaAfiliacion: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  // -------------------------
-  // VALIDACIÓN DE CAMPOS POR TAB
-  // -------------------------
   const validarTab = (tabIndex) => {
     const newErrors = {};
-
     if (tabIndex === 0) {
       if (!form.tipoDocumento) newErrors.tipoDocumento = "Requerido";
       if (!form.numeroDocumento) newErrors.numeroDocumento = "Requerido";
@@ -87,12 +77,9 @@ export default function RegistrarClientePage() {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // si no hay errores = OK
+    return Object.keys(newErrors).length === 0;
   };
 
-  // -------------------------
-  // FUNCIÓN FINAL
-  // -------------------------
   const handleRegistrar = () => {
     if (!validarTab(2)) return;
     setOpenModal(true);
@@ -100,22 +87,22 @@ export default function RegistrarClientePage() {
 
   const handleAceptar = () => {
     setOpenModal(false);
-    navigate("/dashboard/clientes"); // ⭐ REDIRECCIÓN FINAL
+    navigate("/dashboard/clientes");
   };
 
-  // -------------------------
-  // ACTUALIZAR CAMPOS
-  // -------------------------
   const handleChange = (field, value) => {
     setForm({ ...form, [field]: value });
   };
 
   return (
     <Box sx={{ p: 4, color: "#fff" }}>
-      <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>
+      <Typography variant="h4" fontWeight="bold" sx={{ mb: 3, color: "#fff" }}>
         Registro de Titulares
       </Typography>
 
+      {/* ------------------------- */}
+      {/* TABS                      */}
+      {/* ------------------------- */}
       <Tabs
         value={tab}
         onChange={(e, v) => {
@@ -138,10 +125,9 @@ export default function RegistrarClientePage() {
         {/* TAB 1 */}
         {tab === 0 && (
           <>
-            <Typography variant="h6" sx={{ mb: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2, color: "#fff" }}>
               Datos Personales
             </Typography>
-
             <Box
               sx={{
                 display: "grid",
@@ -165,9 +151,7 @@ export default function RegistrarClientePage() {
               <TextField
                 label="Número de Documento"
                 value={form.numeroDocumento}
-                onChange={(e) =>
-                  handleChange("numeroDocumento", e.target.value)
-                }
+                onChange={(e) => handleChange("numeroDocumento", e.target.value)}
                 error={!!errors.numeroDocumento}
                 helperText={errors.numeroDocumento}
                 sx={inputWhite}
@@ -309,11 +293,16 @@ export default function RegistrarClientePage() {
         {/* TAB 2 */}
         {tab === 1 && (
           <>
-            <Typography variant="h6" sx={{ mb: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2, color: "#fff" }}>
               Información de Contacto
             </Typography>
-
-            <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: "repeat(3, 1fr)" }}>
+            <Box
+              sx={{
+                display: "grid",
+                gap: 2,
+                gridTemplateColumns: "repeat(3, 1fr)",
+              }}
+            >
               <TextField
                 label="Dirección"
                 value={form.direccion}
@@ -322,7 +311,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.direccion}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Barrio"
                 value={form.barrio}
@@ -331,7 +319,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.barrio}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Municipio"
                 value={form.municipio}
@@ -340,7 +327,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.municipio}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Departamento"
                 value={form.departamento}
@@ -349,7 +335,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.departamento}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Teléfono Fijo"
                 value={form.telFijo}
@@ -358,7 +343,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.telFijo}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Teléfono Celular"
                 value={form.telCelular}
@@ -367,7 +351,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.telCelular}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Correo Electrónico"
                 value={form.correo}
@@ -376,7 +359,6 @@ export default function RegistrarClientePage() {
                 helperText={errors.correo}
                 sx={inputWhite}
               />
-
               <TextField
                 label="Medio de Contacto Preferido"
                 select
@@ -400,7 +382,6 @@ export default function RegistrarClientePage() {
               >
                 Regresar
               </Button>
-
               <Button
                 variant="contained"
                 onClick={() => {
@@ -416,23 +397,19 @@ export default function RegistrarClientePage() {
         {/* TAB 3 */}
         {tab === 2 && (
           <>
-            <Typography variant="h6" sx={{ mb: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2, color: "#fff" }}>
               Detalles de Afiliación
             </Typography>
-
             <TextField
               label="Fecha de Afiliación"
               type="date"
               InputLabelProps={{ shrink: true }}
               value={form.fechaAfiliacion}
-              onChange={(e) =>
-                handleChange("fechaAfiliacion", e.target.value)
-              }
+              onChange={(e) => handleChange("fechaAfiliacion", e.target.value)}
               error={!!errors.fechaAfiliacion}
               helperText={errors.fechaAfiliacion}
               sx={{ ...inputWhite, width: "30%" }}
             />
-
             <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
               <Button variant="contained" onClick={handleRegistrar}>
                 Registrar
@@ -442,7 +419,7 @@ export default function RegistrarClientePage() {
         )}
       </Paper>
 
-      {/* MODAL DE ÉXITO */}
+      {/* MODAL */}
       <Dialog open={openModal} onClose={() => setOpenModal(false)}>
         <DialogContent
           sx={{
@@ -458,15 +435,12 @@ export default function RegistrarClientePage() {
             width={60}
             style={{ marginBottom: 15 }}
           />
-
-          <Typography variant="h5" fontWeight="bold" sx={{ mb: 1 }}>
+          <Typography variant="h5" fontWeight="bold" sx={{ mb: 1, color: "#fff" }}>
             ¡Registro Exitoso!
           </Typography>
-
           <Typography sx={{ color: "#9ca3af", mb: 3 }}>
             El Titular ha sido creado
           </Typography>
-
           <Button variant="contained" fullWidth onClick={handleAceptar}>
             Aceptar
           </Button>
@@ -476,9 +450,14 @@ export default function RegistrarClientePage() {
   );
 }
 
-/* ESTILOS INPUT */
 const inputWhite = {
-  label: { color: "#9ca3af" },
-  input: { color: "#fff" },
-  "& .MuiSelect-icon": { color: "#fff" },
+  "& .MuiInputLabel-root": { color: "#9ca3af" },
+  "& .MuiInputLabel-root.Mui-focused": { color: "#fff !important" },
+  "& .MuiInputBase-input": { color: "#fff !important" },
+  "& .MuiSelect-select": { color: "#fff !important" },
+  "& .MuiSelect-icon": { color: "#fff !important" },
+  "& .MuiOutlinedInput-notchedOutline": { borderColor: "#9ca3af" },
+  "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#fff" },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#fff" },
+  "& .MuiFormHelperText-root": { color: "#ff6b6b" },
 };

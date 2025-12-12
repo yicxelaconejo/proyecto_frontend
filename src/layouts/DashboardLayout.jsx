@@ -1,24 +1,40 @@
 import { Box, Typography, Avatar } from "@mui/material";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 
-import { Home, Map, People, Payment, Build, Person, BarChart, Logout } from "@mui/icons-material";
+import {
+  Home,
+  Map,
+  People,
+  Payment,
+  Build,
+  Person,
+  BarChart,
+  Logout,
+} from "@mui/icons-material";
 
 export default function DashboardLayout() {
   const location = useLocation();
+  const navigate = useNavigate(); // 👈 Hook para navegación
 
   const menuItems = [
     { icon: <Home />, text: "Inicio", path: "/dashboard" },
     { icon: <Map />, text: "Rutas", path: "/dashboard/rutas" },
     { icon: <People />, text: "Clientes", path: "/dashboard/clientes" },
-    { icon: <Payment />, text: "Pagos", path: "/dashboard/pagos" },
-    { icon: <Build />, text: "Servicios", path: "/dashboard/servicios" },
-    { icon: <Person />, text: "Usuarios", path: "/dashboard/usuarios" },
-    { icon: <BarChart />, text: "Reportes", path: "/dashboard/reportes" },
+    { icon: <Payment />, text: "Pagos", path: "/dashboard/clientes/whatsapp" },
+    // { icon: <Build />, text: "Servicios", path: "/dashboard/servicios" },
+    // { icon: <Person />, text: "Usuarios", path: "/dashboard/usuarios" },
+    // { icon: <BarChart />, text: "Reportes", path: "/dashboard/reportes" },
   ];
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", bgcolor: "#0d141c", color: "#fff" }}>
-
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+        bgcolor: "#0d141c",
+        color: "#fff",
+      }}
+    >
       {/* Sidebar */}
       <Box
         sx={{
@@ -65,7 +81,19 @@ export default function DashboardLayout() {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor: "pointer" }}>
+        {/* Cerrar Sesión */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            cursor: "pointer",
+            p: 1,
+            borderRadius: 2,
+            "&:hover": { bgcolor: "#1c2833" },
+          }}
+          onClick={() => navigate("/")} // 👈 Navega a Home
+        >
           <Logout />
           <Typography>Cerrar Sesión</Typography>
         </Box>
@@ -78,12 +106,13 @@ export default function DashboardLayout() {
             Panel
           </Typography>
 
-          <Avatar src="https://i.pravatar.cc/150" sx={{ width: 45, height: 45 }} />
+          <Avatar
+            src="https://i.pravatar.cc/150"
+            sx={{ width: 45, height: 45 }}
+          />
         </Box>
-
         <Outlet /> {/* 👉 Aquí se cargan las páginas */}
       </Box>
-
     </Box>
   );
 }
